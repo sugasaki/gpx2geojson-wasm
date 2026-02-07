@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>gpx2geojson-wasm test</title>
+  <style>
+    body { font-family: monospace; margin: 2rem; }
+    pre { background: #f4f4f4; padding: 1rem; overflow: auto; }
+    .error { color: red; }
+    .ok { color: green; }
+  </style>
+</head>
+<body>
+  <h1>gpx2geojson-wasm browser test</h1>
+  <p id="status">Loading...</p>
+  <pre id="output"></pre>
+  <script type="module">
+    import { gpxToGeoJson } from './dist/index.js';
+
+    const gpx = `<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="test"
+     xmlns="http://www.topografix.com/GPX/1/1">
+  <wpt lat="35.6812" lon="139.7671">
+    <name>Tokyo Station</name>
+    <ele>3.0</ele>
+  </wpt>
+  <trk>
+    <name>Imperial Palace Run</name>
+    <trkseg>
+      <trkpt lat="35.6852" lon="139.7528"><ele>10</ele></trkpt>
+      <trkpt lat="35.6870" lon="139.7560"><ele>12</ele></trkpt>
+      <trkpt lat="35.6838" lon="139.7590"><ele>11</ele></trkpt>
+    </trkseg>
+  </trk>
+</gpx>`;
+
+    const status = document.getElementById('status');
+    const output = document.getElementById('output');
+
+    try {
+      const geojson = await gpxToGeoJson(gpx);
+      status.textContent = `OK: ${geojson.features.length} feature(s)`;
+      status.className = 'ok';
+      output.textContent = JSON.stringify(geojson, null, 2);
+      console.log('gpxToGeoJson result:', geojson);
+    } catch (e) {
+      status.textContent = 'Error: ' + e;
+      status.className = 'error';
+      output.textContent = String(e.stack || e);
+      console.error(e);
+    }
+  </script>
+</body>
+</html>

@@ -19,7 +19,8 @@
   "scripts": {
     "build:wasm": "wasm-pack build --target web --release",
     "build:js": "tsc -p js/tsconfig.json",
-    "build": "npm run build:wasm && npm run build:js"
+    "build": "npm run build:wasm && npm run build:js",
+    "serve": "npx serve ."
   },
   "devDependencies": {
     "@types/geojson": "^7946.0.14",

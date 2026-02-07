@@ -49,7 +49,7 @@
   </details>
 
   <script type="module">
-    import { gpxToGeoJson } from './dist/index.js';
+    import { gpxToGeoJson, gpxToGeoJsonString } from './dist/index.js';
 
     const gpx = `<?xml version="1.0" encoding="UTF-8"?>
 <gpx version="1.1" creator="test"
@@ -72,40 +72,51 @@
     const output = document.getElementById('output');
     document.getElementById('input-gpx').textContent = gpx;
 
-    function setCheck(id, pass) {
+    function setCheck(id, pass, detail) {
       const el = document.getElementById(id);
       el.classList.add(pass ? 'pass' : 'fail');
+      if (detail) el.textContent += ` — ${detail}`;
     }
 
     try {
-      const geojson = await gpxToGeoJson(gpx);
+      // gpxToGeoJsonString で JSON 文字列を取得し、パースして検証
+      const jsonStr = await gpxToGeoJsonString(gpx);
+      const geojson = JSON.parse(jsonStr);
       setCheck('check-init', true);
 
       output.textContent = JSON.stringify(geojson, null, 2);
 
-      const features = geojson.features || [];
-      setCheck('check-features', features.length === 2);
+      // gpxToGeoJson (JsValue 返却) も動作確認
+      const geojsonObj = await gpxToGeoJson(gpx);
+      console.log('gpxToGeoJson (JsValue):', geojsonObj);
+      console.log('gpxToGeoJsonString (parsed):', geojson);
 
-      const wpt = features.find(f => f.geometry.type === 'Point');
+      const features = geojson.features || [];
+      const featureOk = features.length === 2;
+      setCheck('check-features', featureOk, `実際: ${features.length} 件`);
+
+      const wpt = features.find(f => f.geometry && f.geometry.type === 'Point');
       const wptOk = wpt
         && wpt.geometry.coordinates[0] === 139.7671
         && wpt.geometry.coordinates[1] === 35.6812
-        && wpt.properties.name === 'Tokyo Station';
-      setCheck('check-wpt', wptOk);
+        && wpt.properties && wpt.properties.name === 'Tokyo Station';
+      setCheck('check-wpt', !!wptOk,
+        wpt ? `coords=[${wpt.geometry.coordinates}], name="${wpt.properties?.name}"` : '見つからず');
 
-      const trk = features.find(f => f.geometry.type === 'LineString');
+      const trk = features.find(f => f.geometry && f.geometry.type === 'LineString');
       const trkOk = trk
         && trk.geometry.coordinates.length === 3
-        && trk.properties.name === 'Imperial Palace Run';
-      setCheck('check-trk', trkOk);
+        && trk.properties && trk.properties.name === 'Imperial Palace Run';
+      setCheck('check-trk', !!trkOk,
+        trk ? `coords=${trk.geometry.coordinates.length}点, name="${trk.properties?.name}"` : '見つからず');
 
-      const allPassed = features.length === 2 && wptOk && trkOk;
+      const allPassed = featureOk && wptOk && trkOk;
       status.textContent = allPassed
         ? '全テスト合格'
         : '一部テストが失敗しました（上の確認項目を参照）';
       status.className = allPassed ? 'ok' : 'error';
     } catch (e) {
-      setCheck('check-init', false);
+      setCheck('check-init', false, String(e));
       status.textContent = 'エラー: ' + e;
       status.className = 'error';
       output.textContent = String(e.stack || e);

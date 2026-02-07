@@ -44,5 +44,5 @@ jobs:
 
       - name: Build WASM
         run: |
-          cargo install wasm-pack --version 0.13.1 --locked
+          cargo install wasm-pack --version 0.13.1 --locked --force
           wasm-pack build --target web --release

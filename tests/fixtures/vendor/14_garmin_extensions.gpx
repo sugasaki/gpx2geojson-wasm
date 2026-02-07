@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1"
+     xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1"
+     xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3"
+     version="1.1" creator="Garmin Connect">
+  <trk>
+    <name>Garmin Activity</name>
+    <type>running</type>
+    <trkseg>
+      <trkpt lat="35.6762" lon="139.6503">
+        <ele>10.0</ele>
+        <time>2025-01-01T06:00:00Z</time>
+        <extensions>
+          <gpxtpx:TrackPointExtension>
+            <gpxtpx:hr>145</gpxtpx:hr>
+            <gpxtpx:cad>82</gpxtpx:cad>
+            <gpxtpx:atemp>18.0</gpxtpx:atemp>
+          </gpxtpx:TrackPointExtension>
+        </extensions>
+      </trkpt>
+      <trkpt lat="35.6770" lon="139.6510">
+        <ele>11.5</ele>
+        <time>2025-01-01T06:01:00Z</time>
+        <extensions>
+          <gpxtpx:TrackPointExtension>
+            <gpxtpx:hr>152</gpxtpx:hr>
+            <gpxtpx:cad>85</gpxtpx:cad>
+            <gpxtpx:atemp>18.5</gpxtpx:atemp>
+          </gpxtpx:TrackPointExtension>
+        </extensions>
+      </trkpt>
+      <trkpt lat="35.6780" lon="139.6520">
+        <ele>12.0</ele>
+        <time>2025-01-01T06:02:00Z</time>
+        <extensions>
+          <gpxtpx:TrackPointExtension>
+            <gpxtpx:hr>158</gpxtpx:hr>
+            <gpxtpx:cad>88</gpxtpx:cad>
+            <gpxtpx:atemp>19.0</gpxtpx:atemp>
+          </gpxtpx:TrackPointExtension>
+        </extensions>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>

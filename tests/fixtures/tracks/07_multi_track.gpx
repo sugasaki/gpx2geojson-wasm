@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1">
+  <trk>
+    <name>Morning Run</name>
+    <trkseg>
+      <trkpt lat="35.6762" lon="139.6503"/>
+      <trkpt lat="35.6770" lon="139.6510"/>
+    </trkseg>
+  </trk>
+  <trk>
+    <name>Evening Walk</name>
+    <trkseg>
+      <trkpt lat="35.6900" lon="139.6700"/>
+      <trkpt lat="35.6910" lon="139.6710"/>
+    </trkseg>
+  </trk>
+</gpx>

@@ -1,8 +1,8 @@
-mod converter;
-mod error;
-mod gpx_types;
-mod options;
-mod parser;
+pub mod converter;
+pub mod error;
+pub mod gpx_types;
+pub mod options;
+pub mod parser;
 
 use wasm_bindgen::prelude::*;
 

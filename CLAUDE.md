@@ -47,7 +47,8 @@ wasm-opt -Os --enable-bulk-memory -o pkg/optimized.wasm pkg/gpx2geojson_wasm_bg.
 - 新しい作業を始める前に **GitHub Issue を作成** する
 - 作業は必ず **feature ブランチ** を切ってから行う (ブランチ名: `issue-{番号}-{概要}`)
 - main ブランチへの直接コミットは禁止
-- 作業完了後は PR を作成して main にマージする
+- 作業完了後は PR を作成する
+- **PR のマージは GitHub 上でレビュー完了後に行う（自動マージ禁止）**
 
 ## 設計上の注意点
 

@@ -1,0 +1,21 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          139.6503,
+          35.6762
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "cmt": "日本語テスト: 東京タワー",
+        "desc": "Special chars: & < > \" '",
+        "gpxType": "waypoint",
+        "name": "Café & Bar <Tokyo>"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

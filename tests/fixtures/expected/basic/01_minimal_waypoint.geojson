@@ -1,0 +1,18 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          139.6503,
+          35.6762
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "gpxType": "waypoint"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

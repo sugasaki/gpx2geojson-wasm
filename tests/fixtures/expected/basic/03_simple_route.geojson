@@ -1,0 +1,31 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            139.6503,
+            35.6762
+          ],
+          [
+            139.6917,
+            35.6895
+          ],
+          [
+            139.7454,
+            35.6586
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "desc": "A route around central Tokyo",
+        "gpxType": "route",
+        "name": "Tokyo Loop",
+        "number": 1
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

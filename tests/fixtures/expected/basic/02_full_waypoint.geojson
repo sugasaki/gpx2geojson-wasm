@@ -1,0 +1,32 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          139.6503,
+          35.6762,
+          40.5
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "cmt": "A comment",
+        "desc": "A famous landmark in Tokyo",
+        "ele": 40.5,
+        "gpxType": "waypoint",
+        "link": {
+          "href": "https://example.com/tokyo-tower",
+          "text": "Tokyo Tower Website",
+          "type": "text/html"
+        },
+        "name": "Tokyo Tower",
+        "src": "GPS",
+        "sym": "Flag, Blue",
+        "time": "2025-01-01T12:00:00Z",
+        "type": "POI"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

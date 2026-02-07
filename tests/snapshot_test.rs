@@ -24,7 +24,7 @@ fn convert_with_opts(gpx: &str, opts: &ConvertOptions) -> serde_json::Value {
 fn assert_snapshot(actual: &serde_json::Value, expected_path: &str) {
     let path = format!("tests/fixtures/expected/{expected_path}");
 
-    if std::env::var("UPDATE_SNAPSHOTS").is_ok() {
+    if matches!(std::env::var("UPDATE_SNAPSHOTS").as_deref(), Ok("1")) {
         let dir = Path::new(&path).parent().unwrap();
         std::fs::create_dir_all(dir).unwrap();
         let pretty = serde_json::to_string_pretty(actual).unwrap();

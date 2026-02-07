@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/0" version="1.0" creator="LegacyGPS">
+  <wpt lat="35.6762" lon="139.6503">
+    <name>Legacy Point</name>
+    <url>https://example.com</url>
+    <urlname>Example</urlname>
+  </wpt>
+  <trk>
+    <name>Legacy Track</name>
+    <trkseg>
+      <trkpt lat="35.0" lon="139.0">
+        <ele>10.0</ele>
+        <speed>5.5</speed>
+        <course>180.0</course>
+      </trkpt>
+      <trkpt lat="35.001" lon="139.001">
+        <ele>11.0</ele>
+        <speed>6.0</speed>
+        <course>185.0</course>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>

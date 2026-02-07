@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="test">
+  <wpt lat="35.6762" lon="139.6503">
+    <ele>40.5</ele>
+    <time>2025-01-01T12:00:00Z</time>
+    <name>Tokyo Tower</name>
+    <cmt>A comment</cmt>
+    <desc>A famous landmark in Tokyo</desc>
+    <src>GPS</src>
+    <sym>Flag, Blue</sym>
+    <type>POI</type>
+    <link href="https://example.com/tokyo-tower">
+      <text>Tokyo Tower Website</text>
+      <type>text/html</type>
+    </link>
+  </wpt>
+</gpx>

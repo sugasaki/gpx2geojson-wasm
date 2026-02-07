@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1">
+  <trk>
+    <name>Morning Run</name>
+    <type>running</type>
+    <trkseg>
+      <trkpt lat="35.6762" lon="139.6503">
+        <ele>10.0</ele>
+        <time>2025-01-01T06:00:00Z</time>
+      </trkpt>
+      <trkpt lat="35.6770" lon="139.6510">
+        <ele>11.5</ele>
+        <time>2025-01-01T06:01:00Z</time>
+      </trkpt>
+      <trkpt lat="35.6780" lon="139.6520">
+        <ele>12.0</ele>
+        <time>2025-01-01T06:02:00Z</time>
+      </trkpt>
+      <trkpt lat="35.6790" lon="139.6530">
+        <ele>11.0</ele>
+        <time>2025-01-01T06:03:00Z</time>
+      </trkpt>
+      <trkpt lat="35.6800" lon="139.6540">
+        <ele>10.5</ele>
+        <time>2025-01-01T06:04:00Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>

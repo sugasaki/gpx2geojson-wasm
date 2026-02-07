@@ -1,6 +1,3 @@
-use std::borrow::Cow;
-
-use quick_xml::escape::unescape;
 use quick_xml::events::{BytesStart, Event};
 use quick_xml::Reader;
 
@@ -320,7 +317,7 @@ fn parse_segment<'a>(reader: &mut Reader<&'a [u8]>) -> Result<GpxSegment> {
 }
 
 /// Read text content of an element as an owned String.
-/// Handles both regular text and CDATA sections.
+/// Handles regular text, CDATA sections, and entity references (Event::GeneralRef).
 fn read_text_owned<'a>(
     reader: &mut Reader<&'a [u8]>,
     start: &BytesStart<'_>,
@@ -332,12 +329,28 @@ fn read_text_owned<'a>(
         match reader.read_event() {
             Ok(Event::Text(e)) => {
                 let raw = std::str::from_utf8(e.as_ref()).unwrap_or_default();
-                let unescaped = unescape(raw).unwrap_or(Cow::Borrowed(raw));
-                text.push_str(&unescaped);
+                text.push_str(raw);
             }
             Ok(Event::CData(e)) => {
                 let s = std::str::from_utf8(e.as_ref()).unwrap_or_default();
                 text.push_str(s);
+            }
+            Ok(Event::GeneralRef(e)) => {
+                // Handle character references (&#60; &#x3C;) and predefined entities
+                if let Ok(Some(ch)) = e.resolve_char_ref() {
+                    text.push(ch);
+                } else {
+                    // Predefined XML entities: amp, lt, gt, quot, apos
+                    let name = std::str::from_utf8(e.as_ref()).unwrap_or_default();
+                    match name {
+                        "amp" => text.push('&'),
+                        "lt" => text.push('<'),
+                        "gt" => text.push('>'),
+                        "quot" => text.push('"'),
+                        "apos" => text.push('\''),
+                        _ => {} // Unknown entity, skip
+                    }
+                }
             }
             Ok(Event::End(e)) if e.name().0 == end_name.as_slice() => break,
             Ok(Event::Eof) => break,

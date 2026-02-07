@@ -1,19 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
   <meta charset="utf-8">
-  <title>gpx2geojson-wasm test</title>
+  <title>gpx2geojson-wasm 動作確認</title>
   <style>
-    body { font-family: monospace; margin: 2rem; }
-    pre { background: #f4f4f4; padding: 1rem; overflow: auto; }
-    .error { color: red; }
-    .ok { color: green; }
+    body { font-family: sans-serif; margin: 2rem; max-width: 900px; }
+    h1 { font-size: 1.4rem; }
+    pre { background: #f4f4f4; padding: 1rem; overflow: auto; border-radius: 4px; font-size: 0.85rem; }
+    .error { color: red; font-weight: bold; }
+    .ok { color: green; font-weight: bold; }
+    .pending { color: #888; }
+    .checklist { list-style: none; padding: 0; }
+    .checklist li { padding: 0.3rem 0; }
+    .checklist li::before { content: "⏳ "; }
+    .checklist li.pass::before { content: "✅ "; }
+    .checklist li.fail::before { content: "❌ "; }
+    details { margin-top: 1rem; }
+    summary { cursor: pointer; font-weight: bold; }
+    section { margin-bottom: 1.5rem; }
   </style>
 </head>
 <body>
-  <h1>gpx2geojson-wasm browser test</h1>
-  <p id="status">Loading...</p>
-  <pre id="output"></pre>
+  <h1>gpx2geojson-wasm 動作確認</h1>
+
+  <section>
+    <p>ページを開くと自動でテストが実行されます。操作は不要です。</p>
+    <p id="status" class="pending">テスト実行中...</p>
+  </section>
+
+  <section>
+    <h2>確認項目</h2>
+    <ul class="checklist">
+      <li id="check-init">WASM の初期化（自動 init）</li>
+      <li id="check-features">Feature 数が 2 件（waypoint + track）</li>
+      <li id="check-wpt">Waypoint: Point (35.6812, 139.7671), name="Tokyo Station"</li>
+      <li id="check-trk">Track: LineString (3点), name="Imperial Palace Run"</li>
+    </ul>
+  </section>
+
+  <details>
+    <summary>変換結果 (GeoJSON)</summary>
+    <pre id="output"></pre>
+  </details>
+
+  <details>
+    <summary>入力 GPX</summary>
+    <pre id="input-gpx"></pre>
+  </details>
+
   <script type="module">
     import { gpxToGeoJson } from './dist/index.js';
 
@@ -36,15 +70,43 @@
 
     const status = document.getElementById('status');
     const output = document.getElementById('output');
+    document.getElementById('input-gpx').textContent = gpx;
+
+    function setCheck(id, pass) {
+      const el = document.getElementById(id);
+      el.classList.add(pass ? 'pass' : 'fail');
+    }
 
     try {
       const geojson = await gpxToGeoJson(gpx);
-      status.textContent = `OK: ${geojson.features.length} feature(s)`;
-      status.className = 'ok';
+      setCheck('check-init', true);
+
       output.textContent = JSON.stringify(geojson, null, 2);
-      console.log('gpxToGeoJson result:', geojson);
+
+      const features = geojson.features || [];
+      setCheck('check-features', features.length === 2);
+
+      const wpt = features.find(f => f.geometry.type === 'Point');
+      const wptOk = wpt
+        && wpt.geometry.coordinates[0] === 139.7671
+        && wpt.geometry.coordinates[1] === 35.6812
+        && wpt.properties.name === 'Tokyo Station';
+      setCheck('check-wpt', wptOk);
+
+      const trk = features.find(f => f.geometry.type === 'LineString');
+      const trkOk = trk
+        && trk.geometry.coordinates.length === 3
+        && trk.properties.name === 'Imperial Palace Run';
+      setCheck('check-trk', trkOk);
+
+      const allPassed = features.length === 2 && wptOk && trkOk;
+      status.textContent = allPassed
+        ? '全テスト合格'
+        : '一部テストが失敗しました（上の確認項目を参照）';
+      status.className = allPassed ? 'ok' : 'error';
     } catch (e) {
-      status.textContent = 'Error: ' + e;
+      setCheck('check-init', false);
+      status.textContent = 'エラー: ' + e;
       status.className = 'error';
       output.textContent = String(e.stack || e);
       console.error(e);

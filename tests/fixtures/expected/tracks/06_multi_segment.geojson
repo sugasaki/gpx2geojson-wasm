@@ -1,0 +1,57 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            139.6503,
+            35.6762
+          ],
+          [
+            139.651,
+            35.677
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "coordinateProperties": {
+          "times": [
+            "2025-01-01T06:00:00Z",
+            "2025-01-01T06:01:00Z"
+          ]
+        },
+        "gpxType": "track",
+        "name": "GPS Signal Lost"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            139.67,
+            35.69
+          ],
+          [
+            139.671,
+            35.691
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "coordinateProperties": {
+          "times": [
+            "2025-01-01T06:30:00Z",
+            "2025-01-01T06:31:00Z"
+          ]
+        },
+        "gpxType": "track",
+        "name": "GPS Signal Lost"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

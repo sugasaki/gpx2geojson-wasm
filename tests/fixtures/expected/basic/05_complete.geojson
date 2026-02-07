@@ -1,0 +1,67 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          139.6503,
+          35.6762,
+          40.5
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "ele": 40.5,
+        "gpxType": "waypoint",
+        "name": "Tokyo Tower"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            139.6503,
+            35.6762
+          ],
+          [
+            139.6917,
+            35.6895
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "gpxType": "route",
+        "name": "Route 1"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            139.6503,
+            35.6762
+          ],
+          [
+            139.651,
+            35.677
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "coordinateProperties": {
+          "times": [
+            "2025-01-01T00:00:00Z",
+            "2025-01-01T00:01:00Z"
+          ]
+        },
+        "gpxType": "track",
+        "name": "Track 1"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

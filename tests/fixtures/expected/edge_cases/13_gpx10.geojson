@@ -1,0 +1,41 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          139.6503,
+          35.6762
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "gpxType": "waypoint",
+        "name": "Legacy Point"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            139.0,
+            35.0,
+            10.0
+          ],
+          [
+            139.001,
+            35.001,
+            11.0
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "gpxType": "track",
+        "name": "Legacy Track"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

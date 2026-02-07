@@ -1,0 +1,39 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          139.6503,
+          35.6762
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "gpxType": "waypoint",
+        "name": "No Namespace"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            139.0,
+            35.0
+          ],
+          [
+            139.001,
+            35.001
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "gpxType": "track",
+        "name": "Track Without NS"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

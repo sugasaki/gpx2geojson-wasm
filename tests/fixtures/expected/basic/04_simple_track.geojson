@@ -1,0 +1,52 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            139.6503,
+            35.6762,
+            10.0
+          ],
+          [
+            139.651,
+            35.677,
+            11.5
+          ],
+          [
+            139.652,
+            35.678,
+            12.0
+          ],
+          [
+            139.653,
+            35.679,
+            11.0
+          ],
+          [
+            139.654,
+            35.68,
+            10.5
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "coordinateProperties": {
+          "times": [
+            "2025-01-01T06:00:00Z",
+            "2025-01-01T06:01:00Z",
+            "2025-01-01T06:02:00Z",
+            "2025-01-01T06:03:00Z",
+            "2025-01-01T06:04:00Z"
+          ]
+        },
+        "gpxType": "track",
+        "name": "Morning Run",
+        "type": "running"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

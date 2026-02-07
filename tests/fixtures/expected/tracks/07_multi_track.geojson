@@ -1,0 +1,45 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            139.6503,
+            35.6762
+          ],
+          [
+            139.651,
+            35.677
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "gpxType": "track",
+        "name": "Morning Run"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            139.67,
+            35.69
+          ],
+          [
+            139.671,
+            35.691
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "gpxType": "track",
+        "name": "Evening Walk"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

@@ -1,0 +1,20 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          139.6503,
+          35.6762,
+          40.5
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "ele": 40.5,
+        "gpxType": "track"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

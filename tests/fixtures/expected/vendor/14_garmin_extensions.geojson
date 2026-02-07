@@ -1,0 +1,40 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            139.6503,
+            35.6762,
+            10.0
+          ],
+          [
+            139.651,
+            35.677,
+            11.5
+          ],
+          [
+            139.652,
+            35.678,
+            12.0
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "coordinateProperties": {
+          "times": [
+            "2025-01-01T06:00:00Z",
+            "2025-01-01T06:01:00Z",
+            "2025-01-01T06:02:00Z"
+          ]
+        },
+        "gpxType": "track",
+        "name": "Garmin Activity",
+        "type": "running"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

@@ -25,6 +25,8 @@ cd gpx2geojson-wasm
 
 ## テスト
 
+### Rust テスト
+
 ```bash
 # 全テスト実行（ユニット + インテグレーション + スナップショット）
 cargo test
@@ -38,6 +40,26 @@ cargo test --test snapshot_test
 # スナップショットの期待ファイルを生成/更新
 UPDATE_SNAPSHOTS=1 cargo test --test snapshot_test
 ```
+
+### ブラウザテスト
+
+TypeScript ラッパーと WASM の動作をブラウザで確認できます。
+
+```bash
+# ビルド（WASM + TypeScript）
+npm install
+npm run build
+
+# ローカルサーバー起動
+npm run serve
+
+# ブラウザで http://localhost:3000/test.html を開く
+```
+
+`test.html` は自動的にテストを実行し、以下を検証します：
+- WASM の自動初期化
+- Waypoint と Track の変換
+- GeoJSON の構造と座標値
 
 ## WASM ビルド
 

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>gpx2geojson-wasm 動作確認</title>
+  <style>
+    body { font-family: sans-serif; margin: 2rem; max-width: 900px; }
+    h1 { font-size: 1.4rem; }
+    pre { background: #f4f4f4; padding: 1rem; overflow: auto; border-radius: 4px; font-size: 0.85rem; }
+    .error { color: red; font-weight: bold; }
+    .ok { color: green; font-weight: bold; }
+    .pending { color: #888; }
+    .checklist { list-style: none; padding: 0; }
+    .checklist li { padding: 0.3rem 0; }
+    .checklist li::before { content: "⏳ "; }
+    .checklist li.pass::before { content: "✅ "; }
+    .checklist li.fail::before { content: "❌ "; }
+    details { margin-top: 1rem; }
+    summary { cursor: pointer; font-weight: bold; }
+    section { margin-bottom: 1.5rem; }
+  </style>
+</head>
+<body>
+  <h1>gpx2geojson-wasm 動作確認</h1>
+
+  <section>
+    <p>ページを開くと自動でテストが実行されます。操作は不要です。</p>
+    <p id="status" class="pending">テスト実行中...</p>
+  </section>
+
+  <section>
+    <h2>確認項目</h2>
+    <ul class="checklist">
+      <li id="check-init">WASM の初期化（自動 init）</li>
+      <li id="check-features">Feature 数が 2 件（waypoint + track）</li>
+      <li id="check-wpt">Waypoint: Point (35.6812, 139.7671), name="Tokyo Station"</li>
+      <li id="check-trk">Track: LineString (3点), name="Imperial Palace Run"</li>
+    </ul>
+  </section>
+
+  <details>
+    <summary>変換結果 (GeoJSON)</summary>
+    <pre id="output"></pre>
+  </details>
+
+  <details>
+    <summary>入力 GPX</summary>
+    <pre id="input-gpx"></pre>
+  </details>
+
+  <script type="module">
+    import { gpxToGeoJson, gpxToGeoJsonString } from './dist/index.js';
+
+    const gpx = `<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="test"
+     xmlns="http://www.topografix.com/GPX/1/1">
+  <wpt lat="35.6812" lon="139.7671">
+    <name>Tokyo Station</name>
+    <ele>3.0</ele>
+  </wpt>
+  <trk>
+    <name>Imperial Palace Run</name>
+    <trkseg>
+      <trkpt lat="35.6852" lon="139.7528"><ele>10</ele></trkpt>
+      <trkpt lat="35.6870" lon="139.7560"><ele>12</ele></trkpt>
+      <trkpt lat="35.6838" lon="139.7590"><ele>11</ele></trkpt>
+    </trkseg>
+  </trk>
+</gpx>`;
+
+    const status = document.getElementById('status');
+    const output = document.getElementById('output');
+    document.getElementById('input-gpx').textContent = gpx;
+
+    function setCheck(id, pass, detail) {
+      const el = document.getElementById(id);
+      el.classList.add(pass ? 'pass' : 'fail');
+      if (detail) el.textContent += ` — ${detail}`;
+    }
+
+    try {
+      // gpxToGeoJsonString で JSON 文字列を取得し、パースして検証
+      const jsonStr = await gpxToGeoJsonString(gpx);
+      const geojson = JSON.parse(jsonStr);
+      setCheck('check-init', true);
+
+      output.textContent = JSON.stringify(geojson, null, 2);
+
+      // gpxToGeoJson (JsValue 返却) も動作確認
+      const geojsonObj = await gpxToGeoJson(gpx);
+      console.log('gpxToGeoJson (JsValue):', geojsonObj);
+      console.log('gpxToGeoJsonString (parsed):', geojson);
+
+      const features = geojson.features || [];
+      const featureOk = features.length === 2;
+      setCheck('check-features', featureOk, `実際: ${features.length} 件`);
+
+      const wpt = features.find(f => f.geometry && f.geometry.type === 'Point');
+      const wptOk = wpt
+        && wpt.geometry.coordinates[0] === 139.7671
+        && wpt.geometry.coordinates[1] === 35.6812
+        && wpt.properties && wpt.properties.name === 'Tokyo Station';
+      setCheck('check-wpt', !!wptOk,
+        wpt ? `coords=[${wpt.geometry.coordinates}], name="${wpt.properties?.name}"` : '見つからず');
+
+      const trk = features.find(f => f.geometry && f.geometry.type === 'LineString');
+      const trkOk = trk
+        && trk.geometry.coordinates.length === 3
+        && trk.properties && trk.properties.name === 'Imperial Palace Run';
+      setCheck('check-trk', !!trkOk,
+        trk ? `coords=${trk.geometry.coordinates.length}点, name="${trk.properties?.name}"` : '見つからず');
+
+      const allPassed = featureOk && wptOk && trkOk;
+      status.textContent = allPassed
+        ? '全テスト合格'
+        : '一部テストが失敗しました（上の確認項目を参照）';
+      status.className = allPassed ? 'ok' : 'error';
+    } catch (e) {
+      setCheck('check-init', false, String(e));
+      status.textContent = 'エラー: ' + e;
+      status.className = 'error';
+      output.textContent = String(e.stack || e);
+      console.error(e);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+{
+  "name": "gpx2geojson-wasm",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist/",
+    "pkg/gpx2geojson_wasm_bg.wasm",
+    "pkg/gpx2geojson_wasm.js",
+    "pkg/gpx2geojson_wasm.d.ts"
+  ],
+  "scripts": {
+    "build:wasm": "wasm-pack build --target web --release",
+    "build:js": "tsc -p js/tsconfig.json",
+    "build": "npm run build:wasm && npm run build:js",
+    "serve": "npx serve ."
+  },
+  "devDependencies": {
+    "@types/geojson": "^7946.0.14",
+    "typescript": "^5.7"
+  },
+  "license": "MIT"
+}
